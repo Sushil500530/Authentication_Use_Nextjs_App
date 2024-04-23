@@ -26,16 +26,18 @@ export async function POST(request: NextRequest) {
             password: hashedPassword
         })
         //  save database from here 
-        const saveUser = await newUser.save();
-        console.log(saveUser);
+        const savedUser = await newUser.save();
+        console.log(savedUser);
+        const userId = savedUser._id;
+        console.log('aikhane ache ta ki jeter jonno verification failed dicche----->', userId);
 
-        // sent verification from email 
-        await sendEmail({ email, emailType: "VERIFY", userId: saveUser._id })
+        // send verification from email 
+        await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id })
 
         return NextResponse.json({
             message:"User registered successfully",
             success:true,
-            saveUser
+            savedUser
         })
 
 
