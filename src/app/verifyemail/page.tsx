@@ -7,13 +7,14 @@ import React, { useEffect, useState } from 'react';
 const VerifyEmailPage = () => {
     // const router = useRouter();
     const [token, setToken] = useState("");
-    const [verified, setVerified] = useState("");
+    const [verified, setVerified] = useState(false);
     const [error, setError] = useState(false);
 
     const VerifyUserEmail = async () => {
         try {
             await axios.post('/api/users/verifyemail', { token })
             setVerified(true)
+            setError(false)
         } catch (error:any) {
             console.log('user is not verified', error.response.data);
             setError(true)
@@ -21,6 +22,7 @@ const VerifyEmailPage = () => {
     }
 
     useEffect(()=>{
+        setError(false)
        const urlToken =  window.location.search.split("=")[1];
        setToken(urlToken || "")
 
@@ -31,6 +33,7 @@ const VerifyEmailPage = () => {
 
 
    useEffect(()=>{
+    setError(false)
     if(token.length > 0){
         VerifyUserEmail()
     }
