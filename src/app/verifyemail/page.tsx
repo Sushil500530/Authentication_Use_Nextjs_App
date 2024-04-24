@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 const VerifyEmailPage = () => {
-    const router = useRouter();
+    // const router = useRouter();
     const [token, setToken] = useState("");
     const [verified, setVerified] = useState("");
     const [error, setError] = useState(false);
@@ -36,9 +36,9 @@ const VerifyEmailPage = () => {
     },[token])
 
     return (
-        <div>
+        <div className='flex items-center justify-center flex-col'>
             <h1 className="text-2xl text-center my-5">Consider here and please verify your email</h1>
-            <h1 className='text-3xl font-bold text-center my-8 uppercase'>what is wrong!</h1>
+           <h1 className='text-lg bg-green-500 text-white px-2 py-1 inline-block rounded-md'>{token ? `${token}` : "No Token"}</h1>
         </div>
     );
 };
