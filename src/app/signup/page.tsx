@@ -15,7 +15,7 @@ export default function SignupPage() {
     const [buttonDisable, setButtonDisable] = useState(false);
     const [loading, setLoading] = useState(false);
 
-
+    console.log(user);
     const handleSignup = async () => {
         try {
             setLoading(true)
@@ -43,9 +43,25 @@ export default function SignupPage() {
 
 
     return (
-        <div>
-            <h1 className="text-2xl font-bold text-center my-5">Signup page</h1>
-            <button onClick={handleSignup}>Click here</button>
+        <div className="flex items-center justify-center flex-col">
+            <h1 className="text-2xl font-bold text-center my-5">Please Signup Here</h1>
+            <h1 className="text-xl font-normal my-5">{loading ? <span className="animate-ping">Processing.....</span> : "Signup"}</h1>
+            <br />
+            <div>
+                <label htmlFor="username">Username*</label> <br />
+                <input type="text" id="username" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })} className="mt-3 border border-gray-400 p-2 mb-5 rounded" />
+            </div>
+            <div>
+                <label htmlFor="email">email*</label> <br />
+                <input type="text" id="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} className="mt-3 border border-gray-400 p-2 mb-5 rounded" />
+            </div>
+            <div>
+                <label htmlFor="password">password*</label> <br />
+                <input type="text" id="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })} className="mt-3 border border-gray-400 p-2 mb-5 rounded" />
+            </div>
+            <div>
+                <button onClick={handleSignup} className="px-24 py-2 bg-green-600 text-white rounded ">Signup</button>
+            </div>
         </div>
     );
 };
