@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { setEngine } from "crypto";
 
 export default function SignupPage() {
     const router = useRouter();
@@ -27,6 +28,7 @@ export default function SignupPage() {
 
 
         } catch (error: any) {
+            setLoading(false)
             console.log("Signup failed");
             toast.error(error.message)
         }

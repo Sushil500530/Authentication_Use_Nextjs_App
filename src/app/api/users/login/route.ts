@@ -11,8 +11,9 @@ export async function POST(request: NextRequest) {
         const reqBody = await request.json();
         const { email, password } = reqBody;
         console.log(reqBody);
-        const user = await User.findOne({ email });
-
+        // const user = await User.findOne({ email });
+        const user = await User.findOne({email})
+        console.log("find login user is -------->", user);
         if (!user) {
             return NextResponse.json({ error: "User does not exists" }, { status: 400 })
         }
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
             email: user.email
         }
 
-        const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1d" });
+        const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1d" });
 
         const response = NextResponse.json({
             message: "Logged In Success",
