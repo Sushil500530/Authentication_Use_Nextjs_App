@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
         // here validation
         console.log(reqBody);
         const user = await User.findOne({ email });
-
+        console.log("find user=====>", user);
         if (user) {
             return NextResponse.json({ error: "User already exists" }, { status: 400 })
         }
@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
         })
         //  save database from here 
         const savedUser = await newUser.save();
-        console.log(savedUser);
         const userId = savedUser._id;
         console.log('aikhane ache ta ki jeter jonno verification failed dicche----->', userId);
 
